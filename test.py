@@ -21,7 +21,7 @@ def getFilesNeeded() :
                 continue
             files.append(os.path.join(src_folder, folder_name, filename))
     files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))
-    files_excluded.extend(files_sorted[10001:40001])
+    files_excluded.extend(files_sorted[10001:40000])
 
 def process_file(file_path):
     file_name = os.path.basename(file_path)

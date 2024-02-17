@@ -232,7 +232,7 @@
         "kind": 2,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "def getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))\n    files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))\n    files_excluded.extend(files_sorted[10001:40001])\ndef process_file(file_path):",
+        "peekOfCode": "def getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))\n    files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))\n    files_excluded.extend(files_sorted[10001:40000])\ndef process_file(file_path):",
         "detail": "test",
         "documentation": {}
     },
