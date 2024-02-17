@@ -13,7 +13,6 @@ valid_solcs_str = ",".join(valid_solcs)
 def extract_number(filename):
     digits = ''.join(filter(str.isdigit, filename))
     return int(digits) if digits else -1  # Return -1 if no digits found
-
 def get_solc_version(
         file_name: str
     ) -> str:

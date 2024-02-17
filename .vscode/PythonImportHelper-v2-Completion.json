@@ -52,6 +52,14 @@
         "documentation": {}
     },
     {
+        "label": "getSlitherResult",
+        "importPath": "Slither",
+        "description": "Slither",
+        "isExtraImport": true,
+        "detail": "Slither",
+        "documentation": {}
+    },
+    {
         "label": "Pool",
         "importPath": "multiprocessing",
         "description": "multiprocessing",
@@ -66,6 +74,22 @@
         "importPath": "time",
         "description": "time",
         "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "extract_number",
+        "importPath": "script",
+        "description": "script",
+        "isExtraImport": true,
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "get_solc_version",
+        "importPath": "script",
+        "description": "script",
+        "isExtraImport": true,
+        "detail": "script",
         "documentation": {}
     },
     {
@@ -204,11 +228,65 @@
         "documentation": {}
     },
     {
-        "label": "printFiles",
+        "label": "getFilesNeeded",
         "kind": 2,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "def printFiles(file):\n    print(f\"start process: {file}\")\n    print(f\"processing process: {file}\")\n    time.sleep(1)\n    print(f\"end process: {file}\")\nnum_process = os.cpu_count()\nif __name__ == \"__main__\":\n    starttime = time.time()\n    with Pool(processes = num_process) as pool:\n        pool.map(printFiles, files)",
+        "peekOfCode": "def getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))\n    files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))\n    files_excluded.extend(files_sorted[10001:40001])\ndef process_file(file_path):",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "process_file",
+        "kind": 2,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "def process_file(file_path):\n    file_name = os.path.basename(file_path)\n    solc = get_solc_version(file_path)  # Implement this function to get Solc version\n    slither_result = getSlitherResult(file_path, solc)\n    result_line = f'{file_name}, {slither_result}\\n'\n    with open(result_file, 'a+') as result:\n        result.write(result_line)\ndef runToolConcurrently():\n    # unique_lines = set()\n    # with open(result_file, 'r') as result:",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "runToolConcurrently",
+        "kind": 2,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "def runToolConcurrently():\n    # unique_lines = set()\n    # with open(result_file, 'r') as result:\n    #     for line in result:\n    #         unique_lines.add(line)  \n    # print(unique_lines)\n    getFilesNeeded()\n    with Pool(processes = num_process) as pool:\n        results = pool.map(process_file, files_excluded)\ndef orderResult():           ",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "orderResult",
+        "kind": 2,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "def orderResult():           \n    # Read the lines from the result file\n    with open(result_file, \"r\") as file:\n        lines = file.readlines()\n    # Sort the lines based on the numeric part of the file names\n    sorted_lines = sorted(lines, key=lambda x: extract_number(x.split(',')[0]))\n    # Write the sorted lines back to the result file\n    with open(result_file, \"w\") as file:\n        file.writelines(sorted_lines)\nif __name__ == \"__main__\":",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "src_folder",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')\nresult_file = os.path.join(os.getcwd(), 'resultTest2.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "result_file",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "result_file = os.path.join(os.getcwd(), 'resultTest2.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  ",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "folders",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "folders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):",
         "detail": "test",
         "documentation": {}
     },
@@ -217,7 +295,16 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "files = ['1.txt', '2.txt', '3.txt', '4.txt', '5.txt']\ndef printFiles(file):\n    print(f\"start process: {file}\")\n    print(f\"processing process: {file}\")\n    time.sleep(1)\n    print(f\"end process: {file}\")\nnum_process = os.cpu_count()\nif __name__ == \"__main__\":\n    starttime = time.time()\n    with Pool(processes = num_process) as pool:",
+        "peekOfCode": "files = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "files_excluded",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "files_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue",
         "detail": "test",
         "documentation": {}
     },
@@ -226,7 +313,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "num_process = os.cpu_count()\nif __name__ == \"__main__\":\n    starttime = time.time()\n    with Pool(processes = num_process) as pool:\n        pool.map(printFiles, files)\n    endtime = time.time()\n    print(f\"Time taken {endtime-starttime} seconds\")",
+        "peekOfCode": "num_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))",
         "detail": "test",
         "documentation": {}
     }
