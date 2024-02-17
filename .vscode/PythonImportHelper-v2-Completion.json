@@ -1,0 +1,233 @@
+[
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "getMythrilResult",
+        "importPath": "Mythril",
+        "description": "Mythril",
+        "isExtraImport": true,
+        "detail": "Mythril",
+        "documentation": {}
+    },
+    {
+        "label": "getSlitherResult",
+        "importPath": "Slither",
+        "description": "Slither",
+        "isExtraImport": true,
+        "detail": "Slither",
+        "documentation": {}
+    },
+    {
+        "label": "Pool",
+        "importPath": "multiprocessing",
+        "description": "multiprocessing",
+        "isExtraImport": true,
+        "detail": "multiprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "run_cmd",
+        "kind": 2,
+        "importPath": "Mythril",
+        "description": "Mythril",
+        "peekOfCode": "def run_cmd(filename, solc) -> dict:\n    try:\n        result = subprocess.run(['myth', 'analyze', filename, '--solv', f'{solc}', '-o', 'json'], capture_output=True, text=True)\n        resultInDict = json.loads(result.stdout)\n        return resultInDict\n    except subprocess.CalledProcessError as e:\n        print(f\"Error running slither: {e}\")    \n        return {}   \ndef checkIssues(resultInJson: dict[str, dict]) -> int:\n    if (resultInJson['success']):",
+        "detail": "Mythril",
+        "documentation": {}
+    },
+    {
+        "label": "checkIssues",
+        "kind": 2,
+        "importPath": "Mythril",
+        "description": "Mythril",
+        "peekOfCode": "def checkIssues(resultInJson: dict[str, dict]) -> int:\n    if (resultInJson['success']):\n        detectors = resultInJson['issues']\n        for detector in detectors:\n            if (detector['swc-id'] == '101'):\n                return 2\n    return -1\ndef checkError(resultInJson: dict[str, dict]) :\n    pass\ndef getMythrilResult(filename, solc):",
+        "detail": "Mythril",
+        "documentation": {}
+    },
+    {
+        "label": "checkError",
+        "kind": 2,
+        "importPath": "Mythril",
+        "description": "Mythril",
+        "peekOfCode": "def checkError(resultInJson: dict[str, dict]) :\n    pass\ndef getMythrilResult(filename, solc):\n    resultInJson = run_cmd(filename, solc)\n    if (checkError(resultInJson)):\n        return -1\n    else:\n        return checkIssues(resultInJson)",
+        "detail": "Mythril",
+        "documentation": {}
+    },
+    {
+        "label": "getMythrilResult",
+        "kind": 2,
+        "importPath": "Mythril",
+        "description": "Mythril",
+        "peekOfCode": "def getMythrilResult(filename, solc):\n    resultInJson = run_cmd(filename, solc)\n    if (checkError(resultInJson)):\n        return -1\n    else:\n        return checkIssues(resultInJson)",
+        "detail": "Mythril",
+        "documentation": {}
+    },
+    {
+        "label": "extract_number",
+        "kind": 2,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "def extract_number(filename):\n    digits = ''.join(filter(str.isdigit, filename))\n    return int(digits) if digits else -1  # Return -1 if no digits found\ndef get_solc_version(\n        file_name: str\n    ) -> str:\n        \"\"\"Xác định phiên bản solidity được khai báo trong mã nguồn\n        Args:\n            sub_container_file_path (str): _description_\n            file_name (str): _description_",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "get_solc_version",
+        "kind": 2,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "def get_solc_version(\n        file_name: str\n    ) -> str:\n        \"\"\"Xác định phiên bản solidity được khai báo trong mã nguồn\n        Args:\n            sub_container_file_path (str): _description_\n            file_name (str): _description_\n        Returns:\n            str | int: -1 Nếu không thể xác định được phiên bản\n                        0 Nếu phiên bản xác định được không được hỗ trợ",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "def main():\n    unique_lines = set()\n    files = []\n    with open(result_file, 'r') as result:\n        for line in result:\n            unique_lines.add(line)  \n    print (unique_lines)\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "src_folder",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')\nresult_file = os.path.join(os.getcwd(), 'result.txt')\nvalid_solcs: list[str] = ['0.8.21', '0.8.20', '0.8.19', '0.8.18', '0.8.17', '0.8.16', '0.8.15', '0.8.14', '0.8.13', '0.8.12', '0.8.11', '0.8.10', '0.8.9', '0.8.8', '0.8.7', '0.8.6', '0.8.5', '0.8.4', '0.8.3', '0.8.2', '0.8.1', '0.8.0', '0.7.6', '0.7.5', '0.7.4', '0.7.3', '0.7.2', '0.7.1', '0.7.0', '0.6.12', '0.6.11', '0.6.10', '0.6.9', '0.6.8', '0.6.7', '0.6.6', '0.6.5', '0.6.4', '0.6.3', '0.6.2', '0.6.1', '0.6.0', '0.5.17', '0.5.16', '0.5.15', '0.5.14', '0.5.13', '0.5.12', '0.5.11', '0.5.10', '0.5.9', '0.5.8', '0.5.7', '0.5.6', '0.5.5', '0.5.4', '0.5.3', '0.5.2', '0.5.1', '0.5.0', '0.4.26', '0.4.25', '0.4.24', '0.4.23', '0.4.22', '0.4.21', '0.4.20', '0.4.19', '0.4.18', '0.4.17', '0.4.16', '0.4.15', '0.4.14', '0.4.13', '0.4.12', '0.4.11', '0.4.10', '0.4.9', '0.4.8', '0.4.7', '0.4.6', '0.4.5', '0.4.3', '0.4.2', '0.4.1', '0.4.0']\nvalid_solcs_str = \",\".join(valid_solcs)\ndef extract_number(filename):\n    digits = ''.join(filter(str.isdigit, filename))\n    return int(digits) if digits else -1  # Return -1 if no digits found\ndef get_solc_version(\n        file_name: str\n    ) -> str:",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "result_file",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "result_file = os.path.join(os.getcwd(), 'result.txt')\nvalid_solcs: list[str] = ['0.8.21', '0.8.20', '0.8.19', '0.8.18', '0.8.17', '0.8.16', '0.8.15', '0.8.14', '0.8.13', '0.8.12', '0.8.11', '0.8.10', '0.8.9', '0.8.8', '0.8.7', '0.8.6', '0.8.5', '0.8.4', '0.8.3', '0.8.2', '0.8.1', '0.8.0', '0.7.6', '0.7.5', '0.7.4', '0.7.3', '0.7.2', '0.7.1', '0.7.0', '0.6.12', '0.6.11', '0.6.10', '0.6.9', '0.6.8', '0.6.7', '0.6.6', '0.6.5', '0.6.4', '0.6.3', '0.6.2', '0.6.1', '0.6.0', '0.5.17', '0.5.16', '0.5.15', '0.5.14', '0.5.13', '0.5.12', '0.5.11', '0.5.10', '0.5.9', '0.5.8', '0.5.7', '0.5.6', '0.5.5', '0.5.4', '0.5.3', '0.5.2', '0.5.1', '0.5.0', '0.4.26', '0.4.25', '0.4.24', '0.4.23', '0.4.22', '0.4.21', '0.4.20', '0.4.19', '0.4.18', '0.4.17', '0.4.16', '0.4.15', '0.4.14', '0.4.13', '0.4.12', '0.4.11', '0.4.10', '0.4.9', '0.4.8', '0.4.7', '0.4.6', '0.4.5', '0.4.3', '0.4.2', '0.4.1', '0.4.0']\nvalid_solcs_str = \",\".join(valid_solcs)\ndef extract_number(filename):\n    digits = ''.join(filter(str.isdigit, filename))\n    return int(digits) if digits else -1  # Return -1 if no digits found\ndef get_solc_version(\n        file_name: str\n    ) -> str:\n        \"\"\"Xác định phiên bản solidity được khai báo trong mã nguồn",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "valid_solcs_str",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "valid_solcs_str = \",\".join(valid_solcs)\ndef extract_number(filename):\n    digits = ''.join(filter(str.isdigit, filename))\n    return int(digits) if digits else -1  # Return -1 if no digits found\ndef get_solc_version(\n        file_name: str\n    ) -> str:\n        \"\"\"Xác định phiên bản solidity được khai báo trong mã nguồn\n        Args:\n            sub_container_file_path (str): _description_",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "run_cmd",
+        "kind": 2,
+        "importPath": "Slither",
+        "description": "Slither",
+        "peekOfCode": "def run_cmd(filename, solc) -> dict:\n    try:\n        result = subprocess.run(['slither', filename, '--solc-solcs-select', f'{solc}', '--json', '-'], capture_output=True, text=True)\n        resultInDict = json.loads(result.stdout)\n        return resultInDict\n    except subprocess.CalledProcessError as e:\n        print(f\"Error running slither: {e}\")    \n        return {}\ndef checkIssues(resultInJson: dict[str, dict]) -> int:\n    if (resultInJson == {}): return 0",
+        "detail": "Slither",
+        "documentation": {}
+    },
+    {
+        "label": "checkIssues",
+        "kind": 2,
+        "importPath": "Slither",
+        "description": "Slither",
+        "peekOfCode": "def checkIssues(resultInJson: dict[str, dict]) -> int:\n    if (resultInJson == {}): return 0\n    if (resultInJson['success']):\n        detectors = resultInJson['results']['detectors']\n        for detector in detectors:\n            if (detector['check'] in issues):\n                return 1\n    return 0\ndef checkError(resultInJson: dict):\n    pass",
+        "detail": "Slither",
+        "documentation": {}
+    },
+    {
+        "label": "checkError",
+        "kind": 2,
+        "importPath": "Slither",
+        "description": "Slither",
+        "peekOfCode": "def checkError(resultInJson: dict):\n    pass\ndef getSlitherResult(filename, solc):\n    resultInJson = run_cmd(filename, solc)\n    if (checkError(resultInJson)):\n        return -1\n    else:\n        return checkIssues(resultInJson)",
+        "detail": "Slither",
+        "documentation": {}
+    },
+    {
+        "label": "getSlitherResult",
+        "kind": 2,
+        "importPath": "Slither",
+        "description": "Slither",
+        "peekOfCode": "def getSlitherResult(filename, solc):\n    resultInJson = run_cmd(filename, solc)\n    if (checkError(resultInJson)):\n        return -1\n    else:\n        return checkIssues(resultInJson)",
+        "detail": "Slither",
+        "documentation": {}
+    },
+    {
+        "label": "issues",
+        "kind": 5,
+        "importPath": "Slither",
+        "description": "Slither",
+        "peekOfCode": "issues = ['timestamp']\ndef run_cmd(filename, solc) -> dict:\n    try:\n        result = subprocess.run(['slither', filename, '--solc-solcs-select', f'{solc}', '--json', '-'], capture_output=True, text=True)\n        resultInDict = json.loads(result.stdout)\n        return resultInDict\n    except subprocess.CalledProcessError as e:\n        print(f\"Error running slither: {e}\")    \n        return {}\ndef checkIssues(resultInJson: dict[str, dict]) -> int:",
+        "detail": "Slither",
+        "documentation": {}
+    },
+    {
+        "label": "printFiles",
+        "kind": 2,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "def printFiles(file):\n    print(f\"start process: {file}\")\n    print(f\"processing process: {file}\")\n    time.sleep(1)\n    print(f\"end process: {file}\")\nnum_process = os.cpu_count()\nif __name__ == \"__main__\":\n    starttime = time.time()\n    with Pool(processes = num_process) as pool:\n        pool.map(printFiles, files)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "files",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "files = ['1.txt', '2.txt', '3.txt', '4.txt', '5.txt']\ndef printFiles(file):\n    print(f\"start process: {file}\")\n    print(f\"processing process: {file}\")\n    time.sleep(1)\n    print(f\"end process: {file}\")\nnum_process = os.cpu_count()\nif __name__ == \"__main__\":\n    starttime = time.time()\n    with Pool(processes = num_process) as pool:",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "num_process",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "num_process = os.cpu_count()\nif __name__ == \"__main__\":\n    starttime = time.time()\n    with Pool(processes = num_process) as pool:\n        pool.map(printFiles, files)\n    endtime = time.time()\n    print(f\"Time taken {endtime-starttime} seconds\")",
+        "detail": "test",
+        "documentation": {}
+    }
+]
