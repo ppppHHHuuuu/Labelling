@@ -232,7 +232,7 @@
         "kind": 2,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "def getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))\n    files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))\n    files_excluded.extend(files_sorted[10001:40000])\ndef process_file(file_path):",
+        "peekOfCode": "def getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))\n        if result_line not in unique_lines:\n    files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))\n    files_excluded.extend(files_sorted[24490:40001])",
         "detail": "test",
         "documentation": {}
     },
@@ -241,7 +241,7 @@
         "kind": 2,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "def process_file(file_path):\n    file_name = os.path.basename(file_path)\n    solc = get_solc_version(file_path)  # Implement this function to get Solc version\n    slither_result = getSlitherResult(file_path, solc)\n    result_line = f'{file_name}, {slither_result}\\n'\n    with open(result_file, 'a+') as result:\n        result.write(result_line)\ndef runToolConcurrently():\n    # unique_lines = set()\n    # with open(result_file, 'r') as result:",
+        "peekOfCode": "def process_file(file_path):\n    file_name = os.path.basename(file_path)\n    solc = get_solc_version(file_path)  # Implement this function to get Solc version\n    slither_result = getSlitherResult(file_path, solc)\n    result_line = f'{file_name}, {slither_result}\\n'\n    if result_line not in unique_lines:\n        with open(result_file, 'a+') as result:\n            result.write(result_line)\ndef runToolConcurrently():\n    getFilesNeeded()",
         "detail": "test",
         "documentation": {}
     },
@@ -250,7 +250,7 @@
         "kind": 2,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "def runToolConcurrently():\n    # unique_lines = set()\n    # with open(result_file, 'r') as result:\n    #     for line in result:\n    #         unique_lines.add(line)  \n    # print(unique_lines)\n    getFilesNeeded()\n    with Pool(processes = num_process) as pool:\n        results = pool.map(process_file, files_excluded)\ndef orderResult():           ",
+        "peekOfCode": "def runToolConcurrently():\n    getFilesNeeded()\n    with Pool(processes = num_process) as pool:\n        results = pool.map(process_file, files_excluded)\ndef orderResult():           \n    # Read the lines from the result file\n    with open(result_file, \"r\") as file:\n        lines = file.readlines()\n    # Sort the lines based on the numeric part of the file names\n    sorted_lines = sorted(lines, key=lambda x: extract_number(x.split(',')[0]))",
         "detail": "test",
         "documentation": {}
     },
@@ -268,7 +268,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')\nresult_file = os.path.join(os.getcwd(), 'resultTest2.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded",
+        "peekOfCode": "src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')\nresult_file = os.path.join(os.getcwd(), 'resultTest3.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:",
         "detail": "test",
         "documentation": {}
     },
@@ -277,7 +277,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "result_file = os.path.join(os.getcwd(), 'resultTest2.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  ",
+        "peekOfCode": "result_file = os.path.join(os.getcwd(), 'resultTest3.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:",
         "detail": "test",
         "documentation": {}
     },
@@ -286,7 +286,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "folders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):",
+        "peekOfCode": "folders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  ",
         "detail": "test",
         "documentation": {}
     },
@@ -295,7 +295,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "files = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):",
+        "peekOfCode": "files = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  \ndef getFilesNeeded() :",
         "detail": "test",
         "documentation": {}
     },
@@ -304,7 +304,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "files_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue",
+        "peekOfCode": "files_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  \ndef getFilesNeeded() :\n    global files_excluded",
         "detail": "test",
         "documentation": {}
     },
@@ -313,8 +313,53 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "num_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 2\ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))",
+        "peekOfCode": "num_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  \ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  ",
         "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "unique_lines",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "unique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  \ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "src_file",
+        "kind": 5,
+        "importPath": "testFunctions",
+        "description": "testFunctions",
+        "peekOfCode": "src_file = os.path.join(os.getcwd(), 'result_send_1.txt')\ndest_file = os.path.join(os.getcwd(), 'result_test.txt')\n# Read the file and split lines\nwith open(src_file, \"r\") as file:\n    lines = file.readlines()\n# Initialize a dictionary to store file names and their counts\nfile_counts = {}\n# Iterate through the lines and count file occurrences\nfor line in lines:\n    file_name, _ = line.strip().split(\", \")  # Extract file name from each line",
+        "detail": "testFunctions",
+        "documentation": {}
+    },
+    {
+        "label": "dest_file",
+        "kind": 5,
+        "importPath": "testFunctions",
+        "description": "testFunctions",
+        "peekOfCode": "dest_file = os.path.join(os.getcwd(), 'result_test.txt')\n# Read the file and split lines\nwith open(src_file, \"r\") as file:\n    lines = file.readlines()\n# Initialize a dictionary to store file names and their counts\nfile_counts = {}\n# Iterate through the lines and count file occurrences\nfor line in lines:\n    file_name, _ = line.strip().split(\", \")  # Extract file name from each line\n    if file_name in file_counts:",
+        "detail": "testFunctions",
+        "documentation": {}
+    },
+    {
+        "label": "file_counts",
+        "kind": 5,
+        "importPath": "testFunctions",
+        "description": "testFunctions",
+        "peekOfCode": "file_counts = {}\n# Iterate through the lines and count file occurrences\nfor line in lines:\n    file_name, _ = line.strip().split(\", \")  # Extract file name from each line\n    if file_name in file_counts:\n        file_counts[file_name] += 1\n    else:\n        file_counts[file_name] = 1\n# Initialize a list to store lines with unique file names\nunique_lines = []",
+        "detail": "testFunctions",
+        "documentation": {}
+    },
+    {
+        "label": "unique_lines",
+        "kind": 5,
+        "importPath": "testFunctions",
+        "description": "testFunctions",
+        "peekOfCode": "unique_lines = []\n# Iterate through the lines again and keep only the first occurrence of each file name\nfor line in lines:\n    file_name, _ = line.strip().split(\", \")  # Extract file name from each line\n    if file_counts[file_name] == 1:\n        unique_lines.append(line)\n    else:\n        print(f\"dup file: {file_name}, {file_counts[file_name]}\")\n        file_counts[file_name] -= 1  # Decrement count for duplicate file names\n# Write the unique lines back to the file",
+        "detail": "testFunctions",
         "documentation": {}
     }
 ]

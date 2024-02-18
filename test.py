@@ -4,15 +4,18 @@ import time
 from script import extract_number, get_solc_version
 from Slither import getSlitherResult
 src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')
-result_file = os.path.join(os.getcwd(), 'resultTest2.txt')
+result_file = os.path.join(os.getcwd(), 'resultTest3.txt')
 
 folders = []
 files = []
 files_excluded = []
 num_process = os.cpu_count()
 if (num_process != None):
-    num_process = num_process - 2
-
+    num_process = num_process - 4
+unique_lines = set()
+with open(result_file, 'r') as result:
+    for line in result.split(',')[0]:
+        unique_lines.add(line)  
 def getFilesNeeded() :
     global files_excluded
     for folder_name in os.listdir(src_folder):  
@@ -20,24 +23,23 @@ def getFilesNeeded() :
             if (filename == '.DS_Store'):
                 continue
             files.append(os.path.join(src_folder, folder_name, filename))
+        if result_line not in unique_lines:
+
     files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))
-    files_excluded.extend(files_sorted[10001:40000])
+    files_excluded.extend(files_sorted[24490:40001])
 
 def process_file(file_path):
     file_name = os.path.basename(file_path)
     solc = get_solc_version(file_path)  # Implement this function to get Solc version
     slither_result = getSlitherResult(file_path, solc)
     result_line = f'{file_name}, {slither_result}\n'
-    with open(result_file, 'a+') as result:
-        result.write(result_line)
+    if result_line not in unique_lines:
+        with open(result_file, 'a+') as result:
+            result.write(result_line)
 
 
 def runToolConcurrently():
-    # unique_lines = set()
-    # with open(result_file, 'r') as result:
-    #     for line in result:
-    #         unique_lines.add(line)  
-    # print(unique_lines)
+
     getFilesNeeded()
     with Pool(processes = num_process) as pool:
         results = pool.map(process_file, files_excluded)
