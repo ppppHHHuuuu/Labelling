@@ -16,9 +16,11 @@ def checkIssues(resultInJson: dict[str, dict]) -> int:
     if (resultInJson['success']):
         detectors = resultInJson['issues']
         for detector in detectors:
+            print (detector['swc-id'])
             if (detector['swc-id'] == '101'):
                 return 2
-    return -1
+        print ('------')
+    return 0
 
 def checkError(resultInJson: dict[str, dict]) :
     pass

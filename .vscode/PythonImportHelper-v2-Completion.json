@@ -44,6 +44,14 @@
         "documentation": {}
     },
     {
+        "label": "getMythrilResult",
+        "importPath": "Mythril",
+        "description": "Mythril",
+        "isExtraImport": true,
+        "detail": "Mythril",
+        "documentation": {}
+    },
+    {
         "label": "getSlitherResult",
         "importPath": "Slither",
         "description": "Slither",
@@ -106,7 +114,7 @@
         "kind": 2,
         "importPath": "Mythril",
         "description": "Mythril",
-        "peekOfCode": "def checkIssues(resultInJson: dict[str, dict]) -> int:\n    if (resultInJson['success']):\n        detectors = resultInJson['issues']\n        for detector in detectors:\n            if (detector['swc-id'] == '101'):\n                return 2\n    return -1\ndef checkError(resultInJson: dict[str, dict]) :\n    pass\ndef getMythrilResult(filename, solc):",
+        "peekOfCode": "def checkIssues(resultInJson: dict[str, dict]) -> int:\n    if (resultInJson['success']):\n        detectors = resultInJson['issues']\n        for detector in detectors:\n            print (detector['swc-id'])\n            if (detector['swc-id'] == '101'):\n                return 2\n        print ('------')\n    return 0\ndef checkError(resultInJson: dict[str, dict]) :",
         "detail": "Mythril",
         "documentation": {}
     },
@@ -160,7 +168,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')\nresult_file = os.path.join(os.getcwd(), 'result.txt')\nvalid_solcs: list[str] = ['0.8.21', '0.8.20', '0.8.19', '0.8.18', '0.8.17', '0.8.16', '0.8.15', '0.8.14', '0.8.13', '0.8.12', '0.8.11', '0.8.10', '0.8.9', '0.8.8', '0.8.7', '0.8.6', '0.8.5', '0.8.4', '0.8.3', '0.8.2', '0.8.1', '0.8.0', '0.7.6', '0.7.5', '0.7.4', '0.7.3', '0.7.2', '0.7.1', '0.7.0', '0.6.12', '0.6.11', '0.6.10', '0.6.9', '0.6.8', '0.6.7', '0.6.6', '0.6.5', '0.6.4', '0.6.3', '0.6.2', '0.6.1', '0.6.0', '0.5.17', '0.5.16', '0.5.15', '0.5.14', '0.5.13', '0.5.12', '0.5.11', '0.5.10', '0.5.9', '0.5.8', '0.5.7', '0.5.6', '0.5.5', '0.5.4', '0.5.3', '0.5.2', '0.5.1', '0.5.0', '0.4.26', '0.4.25', '0.4.24', '0.4.23', '0.4.22', '0.4.21', '0.4.20', '0.4.19', '0.4.18', '0.4.17', '0.4.16', '0.4.15', '0.4.14', '0.4.13', '0.4.12', '0.4.11', '0.4.10', '0.4.9', '0.4.8', '0.4.7', '0.4.6', '0.4.5', '0.4.3', '0.4.2', '0.4.1', '0.4.0']\nvalid_solcs_str = \",\".join(valid_solcs)\ndef extract_number(filename):\n    digits = ''.join(filter(str.isdigit, filename))\n    return int(digits) if digits else -1  # Return -1 if no digits found\ndef get_solc_version(\n        file_name: str\n    ) -> str:",
+        "peekOfCode": "src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')\nresult_file = os.path.join(os.getcwd(),'IOU', 'result.txt')\nvalid_solcs: list[str] = ['0.8.21', '0.8.20', '0.8.19', '0.8.18', '0.8.17', '0.8.16', '0.8.15', '0.8.14', '0.8.13', '0.8.12', '0.8.11', '0.8.10', '0.8.9', '0.8.8', '0.8.7', '0.8.6', '0.8.5', '0.8.4', '0.8.3', '0.8.2', '0.8.1', '0.8.0', '0.7.6', '0.7.5', '0.7.4', '0.7.3', '0.7.2', '0.7.1', '0.7.0', '0.6.12', '0.6.11', '0.6.10', '0.6.9', '0.6.8', '0.6.7', '0.6.6', '0.6.5', '0.6.4', '0.6.3', '0.6.2', '0.6.1', '0.6.0', '0.5.17', '0.5.16', '0.5.15', '0.5.14', '0.5.13', '0.5.12', '0.5.11', '0.5.10', '0.5.9', '0.5.8', '0.5.7', '0.5.6', '0.5.5', '0.5.4', '0.5.3', '0.5.2', '0.5.1', '0.5.0', '0.4.26', '0.4.25', '0.4.24', '0.4.23', '0.4.22', '0.4.21', '0.4.20', '0.4.19', '0.4.18', '0.4.17', '0.4.16', '0.4.15', '0.4.14', '0.4.13', '0.4.12', '0.4.11', '0.4.10', '0.4.9', '0.4.8', '0.4.7', '0.4.6', '0.4.5', '0.4.3', '0.4.2', '0.4.1', '0.4.0']\nvalid_solcs_str = \",\".join(valid_solcs)\ndef extract_number(filename):\n    digits = ''.join(filter(str.isdigit, filename))\n    return int(digits) if digits else -1  # Return -1 if no digits found\ndef get_solc_version(\n        file_name: str\n    ) -> str:",
         "detail": "script",
         "documentation": {}
     },
@@ -169,7 +177,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "result_file = os.path.join(os.getcwd(), 'result.txt')\nvalid_solcs: list[str] = ['0.8.21', '0.8.20', '0.8.19', '0.8.18', '0.8.17', '0.8.16', '0.8.15', '0.8.14', '0.8.13', '0.8.12', '0.8.11', '0.8.10', '0.8.9', '0.8.8', '0.8.7', '0.8.6', '0.8.5', '0.8.4', '0.8.3', '0.8.2', '0.8.1', '0.8.0', '0.7.6', '0.7.5', '0.7.4', '0.7.3', '0.7.2', '0.7.1', '0.7.0', '0.6.12', '0.6.11', '0.6.10', '0.6.9', '0.6.8', '0.6.7', '0.6.6', '0.6.5', '0.6.4', '0.6.3', '0.6.2', '0.6.1', '0.6.0', '0.5.17', '0.5.16', '0.5.15', '0.5.14', '0.5.13', '0.5.12', '0.5.11', '0.5.10', '0.5.9', '0.5.8', '0.5.7', '0.5.6', '0.5.5', '0.5.4', '0.5.3', '0.5.2', '0.5.1', '0.5.0', '0.4.26', '0.4.25', '0.4.24', '0.4.23', '0.4.22', '0.4.21', '0.4.20', '0.4.19', '0.4.18', '0.4.17', '0.4.16', '0.4.15', '0.4.14', '0.4.13', '0.4.12', '0.4.11', '0.4.10', '0.4.9', '0.4.8', '0.4.7', '0.4.6', '0.4.5', '0.4.3', '0.4.2', '0.4.1', '0.4.0']\nvalid_solcs_str = \",\".join(valid_solcs)\ndef extract_number(filename):\n    digits = ''.join(filter(str.isdigit, filename))\n    return int(digits) if digits else -1  # Return -1 if no digits found\ndef get_solc_version(\n        file_name: str\n    ) -> str:\n        \"\"\"Xác định phiên bản solidity được khai báo trong mã nguồn",
+        "peekOfCode": "result_file = os.path.join(os.getcwd(),'IOU', 'result.txt')\nvalid_solcs: list[str] = ['0.8.21', '0.8.20', '0.8.19', '0.8.18', '0.8.17', '0.8.16', '0.8.15', '0.8.14', '0.8.13', '0.8.12', '0.8.11', '0.8.10', '0.8.9', '0.8.8', '0.8.7', '0.8.6', '0.8.5', '0.8.4', '0.8.3', '0.8.2', '0.8.1', '0.8.0', '0.7.6', '0.7.5', '0.7.4', '0.7.3', '0.7.2', '0.7.1', '0.7.0', '0.6.12', '0.6.11', '0.6.10', '0.6.9', '0.6.8', '0.6.7', '0.6.6', '0.6.5', '0.6.4', '0.6.3', '0.6.2', '0.6.1', '0.6.0', '0.5.17', '0.5.16', '0.5.15', '0.5.14', '0.5.13', '0.5.12', '0.5.11', '0.5.10', '0.5.9', '0.5.8', '0.5.7', '0.5.6', '0.5.5', '0.5.4', '0.5.3', '0.5.2', '0.5.1', '0.5.0', '0.4.26', '0.4.25', '0.4.24', '0.4.23', '0.4.22', '0.4.21', '0.4.20', '0.4.19', '0.4.18', '0.4.17', '0.4.16', '0.4.15', '0.4.14', '0.4.13', '0.4.12', '0.4.11', '0.4.10', '0.4.9', '0.4.8', '0.4.7', '0.4.6', '0.4.5', '0.4.3', '0.4.2', '0.4.1', '0.4.0']\nvalid_solcs_str = \",\".join(valid_solcs)\ndef extract_number(filename):\n    digits = ''.join(filter(str.isdigit, filename))\n    return int(digits) if digits else -1  # Return -1 if no digits found\ndef get_solc_version(\n        file_name: str\n    ) -> str:\n        \"\"\"Xác định phiên bản solidity được khai báo trong mã nguồn",
         "detail": "script",
         "documentation": {}
     },
@@ -232,7 +240,7 @@
         "kind": 2,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "def getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))\n        if result_line not in unique_lines:\n    files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))\n    files_excluded.extend(files_sorted[24490:40001])",
+        "peekOfCode": "def getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue\n            files.append(os.path.join(src_folder, folder_name, filename))\n    files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))\n    # print (\"files_sorted, \", files_sorted)    \n    files_excluded.extend(files_sorted[500:1000])",
         "detail": "test",
         "documentation": {}
     },
@@ -241,7 +249,7 @@
         "kind": 2,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "def process_file(file_path):\n    file_name = os.path.basename(file_path)\n    solc = get_solc_version(file_path)  # Implement this function to get Solc version\n    slither_result = getSlitherResult(file_path, solc)\n    result_line = f'{file_name}, {slither_result}\\n'\n    if result_line not in unique_lines:\n        with open(result_file, 'a+') as result:\n            result.write(result_line)\ndef runToolConcurrently():\n    getFilesNeeded()",
+        "peekOfCode": "def process_file(file_path):\n    file_name = os.path.basename(file_path)\n    solc = get_solc_version(file_path)  # Implement this function to get Solc version\n    mythril_result = getMythrilResult(file_path, solc)\n    result_line = f'{file_name}, {mythril_result}\\n'\n    print (result_line)\n    # if result_line not in unique_lines:\n    with open(result_file, 'a+') as result:\n        result.write(result_line)\ndef runToolConcurrently():",
         "detail": "test",
         "documentation": {}
     },
@@ -268,7 +276,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')\nresult_file = os.path.join(os.getcwd(), 'resultTest3.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:",
+        "peekOfCode": "src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')\nresult_file = os.path.join(os.getcwd(), 'IOU', 'resultTest.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count() - 4\nif (num_process != None):\n    num_process = num_process\n# unique_lines = set()\n# with open(result_file, 'r') as result:",
         "detail": "test",
         "documentation": {}
     },
@@ -277,7 +285,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "result_file = os.path.join(os.getcwd(), 'resultTest3.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:",
+        "peekOfCode": "result_file = os.path.join(os.getcwd(), 'IOU', 'resultTest.txt')\nfolders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count() - 4\nif (num_process != None):\n    num_process = num_process\n# unique_lines = set()\n# with open(result_file, 'r') as result:\n#     for line in result.split(',')[0]:",
         "detail": "test",
         "documentation": {}
     },
@@ -286,7 +294,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "folders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  ",
+        "peekOfCode": "folders = []\nfiles = []\nfiles_excluded = []\nnum_process = os.cpu_count() - 4\nif (num_process != None):\n    num_process = num_process\n# unique_lines = set()\n# with open(result_file, 'r') as result:\n#     for line in result.split(',')[0]:\n#         unique_lines.add(line)  ",
         "detail": "test",
         "documentation": {}
     },
@@ -295,7 +303,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "files = []\nfiles_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  \ndef getFilesNeeded() :",
+        "peekOfCode": "files = []\nfiles_excluded = []\nnum_process = os.cpu_count() - 4\nif (num_process != None):\n    num_process = num_process\n# unique_lines = set()\n# with open(result_file, 'r') as result:\n#     for line in result.split(',')[0]:\n#         unique_lines.add(line)  \ndef getFilesNeeded() :",
         "detail": "test",
         "documentation": {}
     },
@@ -304,7 +312,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "files_excluded = []\nnum_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  \ndef getFilesNeeded() :\n    global files_excluded",
+        "peekOfCode": "files_excluded = []\nnum_process = os.cpu_count() - 4\nif (num_process != None):\n    num_process = num_process\n# unique_lines = set()\n# with open(result_file, 'r') as result:\n#     for line in result.split(',')[0]:\n#         unique_lines.add(line)  \ndef getFilesNeeded() :\n    global files_excluded",
         "detail": "test",
         "documentation": {}
     },
@@ -313,16 +321,7 @@
         "kind": 5,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "num_process = os.cpu_count()\nif (num_process != None):\n    num_process = num_process - 4\nunique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  \ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  ",
-        "detail": "test",
-        "documentation": {}
-    },
-    {
-        "label": "unique_lines",
-        "kind": 5,
-        "importPath": "test",
-        "description": "test",
-        "peekOfCode": "unique_lines = set()\nwith open(result_file, 'r') as result:\n    for line in result.split(',')[0]:\n        unique_lines.add(line)  \ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  \n        for filename in os.listdir(os.path.join(src_folder, folder_name)):\n            if (filename == '.DS_Store'):\n                continue",
+        "peekOfCode": "num_process = os.cpu_count() - 4\nif (num_process != None):\n    num_process = num_process\n# unique_lines = set()\n# with open(result_file, 'r') as result:\n#     for line in result.split(',')[0]:\n#         unique_lines.add(line)  \ndef getFilesNeeded() :\n    global files_excluded\n    for folder_name in os.listdir(src_folder):  ",
         "detail": "test",
         "documentation": {}
     },

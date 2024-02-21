@@ -1,0 +1,5 @@
+resultTest.txt, 0
+timed_crowdsale.sol, 0
+swc-112-proxy-fix.sol, 0
+time_lock.sol, 2
+Integer Overflow.sol, 2
