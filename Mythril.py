@@ -1,12 +1,19 @@
 import json
 import subprocess
 
-
+import time
 
 
 def run_cmd(filename, solc) -> dict:
+
     try:
+        start_time = time.time()
+
         result = subprocess.run(['myth', 'analyze', filename, '--solv', f'{solc}', '-o', 'json'], capture_output=True, text=True)
+        end_time = time.time()
+        time_difference = end_time - start_time
+
+        print("Time difference:", time_difference, "seconds")
         resultInDict = json.loads(result.stdout)
         return resultInDict
     except subprocess.CalledProcessError as e:

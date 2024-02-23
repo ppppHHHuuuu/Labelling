@@ -1,6 +1,6 @@
 from multiprocessing import Pool
 import os
-import time
+# import time
 from script import extract_number, get_solc_version
 from Slither import getSlitherResult
 from Mythril import getMythrilResult
@@ -10,7 +10,7 @@ result_file = os.path.join(os.getcwd(), 'IOU', 'resultTest.txt')
 folders = []
 files = []
 files_excluded = []
-num_process = os.cpu_count() - 4
+num_process = os.cpu_count() - 6
 if (num_process != None):
     num_process = num_process
 # unique_lines = set()
@@ -27,7 +27,7 @@ def getFilesNeeded() :
 
     files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))
     # print ("files_sorted, ", files_sorted)    
-    files_excluded.extend(files_sorted[500:1000])
+    files_excluded.extend(files_sorted[2000:2100])
 
 def process_file(file_path):
     file_name = os.path.basename(file_path)

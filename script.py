@@ -101,7 +101,7 @@ def main():
             slither_result = getSlitherResult(filename=f.name, solc =solc) 
             with open (result_file, 'a+') as result: 
                 result_line = f'{file_name}, {slither_result}\n'
-                print(result_line)
+                # print(result_line)
                 if (result_line not in unique_lines):
                     result.write(result_line)
                     unique_lines.add(result_line)
