@@ -10,9 +10,9 @@ result_file = os.path.join(os.getcwd(), 'IOU', 'resultTest.txt')
 folders = []
 files = []
 files_excluded = []
-num_process = os.cpu_count() - 6
+num_process = os.cpu_count() 
 if (num_process != None):
-    num_process = num_process
+    num_process = num_process - 6
 # unique_lines = set()
 # with open(result_file, 'r') as result:
 #     for line in result.split(',')[0]:
@@ -27,7 +27,7 @@ def getFilesNeeded() :
 
     files_sorted = sorted(files, key=lambda x: extract_number(os.path.basename(x)))
     # print ("files_sorted, ", files_sorted)    
-    files_excluded.extend(files_sorted[2000:2100])
+    files_excluded.extend(files_sorted[3000:3100])
 
 def process_file(file_path):
     file_name = os.path.basename(file_path)
