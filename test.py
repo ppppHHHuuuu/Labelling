@@ -49,14 +49,14 @@ def runToolConcurrently():
 
 def orderResult():           
     # Read the lines from the result file
-    with open(result_file, "r") as file:
+    with open(merge_file, "r") as file:
         lines = file.readlines()
 
     # Sort the lines based on the numeric part of the file names
     sorted_lines = sorted(lines, key=lambda x: extract_number(x.split(',')[0]))
 
     # Write the sorted lines back to the result file
-    with open(result_file, "w") as file:
+    with open(merge_file, "w") as file:
         file.writelines(sorted_lines)
 
 def merge_files(file1, file2):
@@ -72,22 +72,23 @@ def merge_files(file1, file2):
     data = {}
     for line in lines1 + lines2:
         filename, number = line.strip().split(', ')
-        if filename in data:
-            data[filename] = max(int(number), data[filename])
-        else:
-            data[filename] = int(number)
+        number = int(number)
+        if number != -1:
+            if filename in data:
+                data[filename] = max(number, data[filename])
+            else:
+                data[filename] = number
 
     # Write merged data to a new file
-    with open('merged_file.sol', 'w') as f:
+    with open(merge_file, 'w') as f:
         for filename, number in sorted(data.items()):
             f.write(f"{filename}, {number}\n")
 
-# Merge two files
-merge_files('result_file.txt', 'file2.txt')
-
 if __name__ == "__main__":
-    runToolConcurrently()
-    # orderResult()
+    # runToolConcurrently()
+    orderResult()
+    # merge_files(result_file, result_remote_file)
+
     
 
 
