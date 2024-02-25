@@ -6,7 +6,8 @@ from Slither import getSlitherResult
 from Mythril import getMythrilResult
 src_folder = os.path.join(os.getcwd(), 'Ethereum_smart_contract_datast', 'Ethereum_smart_contract_datast', 'contract_dataset_ethereum')
 result_file = os.path.join(os.getcwd(), 'IOU', 'resultTest.txt')
-
+result_remote_file = os.path.join(os.getcwd(), 'IOU', 'resultTestFromRemote.txt')
+merge_file = os.path.join(os.getcwd(), 'IOU', 'resultMerge.txt')
 folders = []
 files = []
 files_excluded = []
@@ -58,6 +59,31 @@ def orderResult():
     with open(result_file, "w") as file:
         file.writelines(sorted_lines)
 
+def merge_files(file1, file2):
+    # Read the contents of the first file
+    with open(file1, 'r') as f:
+        lines1 = f.readlines()
+
+    # Read the contents of the second file
+    with open(file2, 'r') as f:
+        lines2 = f.readlines()
+
+    # Store filenames and numbers in a dictionary
+    data = {}
+    for line in lines1 + lines2:
+        filename, number = line.strip().split(', ')
+        if filename in data:
+            data[filename] = max(int(number), data[filename])
+        else:
+            data[filename] = int(number)
+
+    # Write merged data to a new file
+    with open('merged_file.sol', 'w') as f:
+        for filename, number in sorted(data.items()):
+            f.write(f"{filename}, {number}\n")
+
+# Merge two files
+merge_files('result_file.txt', 'file2.txt')
 
 if __name__ == "__main__":
     runToolConcurrently()
